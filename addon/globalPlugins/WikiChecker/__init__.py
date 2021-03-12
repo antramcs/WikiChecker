@@ -63,6 +63,9 @@ class VentanaPrincipal(wx.Frame):
 		
 		self.listaResultados.Clear()
 		self.listaResultados.AppendItems(resultados)
+		self.listaResultados.SetFocus()
 	
 	def onMostrarArticulo(self, event):
-		self.resultadoCtrl.SetValue("funciono.")
+		opcion = self.listaResultados.GetSelection()
+		texto = self.listaResultados.GetString(opcion)
+		self.resultadoCtrl.SetValue(texto)
