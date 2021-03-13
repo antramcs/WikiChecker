@@ -47,7 +47,7 @@ class VentanaPrincipal(wx.Frame):
 		
 		self.articulosDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Artículos disponibles")
 		self.listaResultados = wx.ListBox(self.panel, wx.ID_ANY, choices=[], style=wx.LB_SINGLE)
-		self.listaResultados.Bind(wx.EVT_LISTBOX, self.onMostrarArticulo)
+		self.listaResultados.Bind(wx.EVT_KEY_UP, self.onMostrarArticulo)
 		
 		self.etiquetaResultadoLbl = wx.StaticText(self.panel, wx.ID_ANY, "Resultado de la búsqueda")
 		self.resultadoCtrl = wx.TextCtrl(self.panel, wx.ID_ANY, "", style=wx.TE_MULTILINE|wx.TE_READONLY, size=(300,200))
@@ -83,9 +83,10 @@ class VentanaPrincipal(wx.Frame):
 		self.listaResultados.SetFocus()
 	
 	def onMostrarArticulo(self, event):
-		opcion = self.listaResultados.GetSelection()
-		pageid = self.resultados[opcion].getPageid()
-		wx.CallAfter(self.obtenerArticulo, pageid)
+		if event.GetKeyCode() == 32:
+			opcion = self.listaResultados.GetSelection()
+			pageid = self.resultados[opcion].getPageid()
+			wx.CallAfter(self.obtenerArticulo, pageid)
 	
 	def obtenerArticulo(self, pageid):
 		url = "https://es.wikipedia.org/?curid=" + str(pageid)
