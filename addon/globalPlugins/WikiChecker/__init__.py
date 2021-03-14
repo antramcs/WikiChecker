@@ -35,7 +35,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 class VentanaPrincipal(wx.Frame):
 	def __init__(self, padre, titulo):
-		super(VentanaPrincipal, self).__init__(padre, -1, titulo, size=(600,400))
+		super(VentanaPrincipal, self).__init__(padre, -1, titulo, size=(1000,700))
 		
 		self.panel = wx.Panel(self, wx.ID_ANY)
 		
@@ -49,12 +49,13 @@ class VentanaPrincipal(wx.Frame):
 		self.listaResultados = wx.ListBox(self.panel, wx.ID_ANY, choices=[], style=wx.LB_SINGLE)
 		self.listaResultados.Bind(wx.EVT_KEY_UP, self.onMostrarArticulo)
 		
-		self.etiquetaResultadoLbl = wx.StaticText(self.panel, wx.ID_ANY, "Resultado de la búsqueda")
-		self.resultadoCtrl = wx.TextCtrl(self.panel, wx.ID_ANY, "", style=wx.TE_MULTILINE|wx.TE_READONLY, size=(300,200))
+#		self.etiquetaResultadoLbl = wx.StaticText(self.panel, wx.ID_ANY, "Resultado de la búsqueda")
+#		self.resultadoCtrl = wx.TextCtrl(self.panel, wx.ID_ANY, "", style=wx.TE_MULTILINE|wx.TE_READONLY, size=(600,400))
 #		self.resultadoCtrl.Hide()
 		
 		self.aceptarBtn = wx.Button(self.panel, wx.ID_ANY, "Aceptar")
 		self.aceptarBtn.Bind(wx.EVT_BUTTON, self.onBuscar)
+		
 		self.cancelarBtn = wx.Button(self.panel, wx.ID_ANY, "Cancelar")
 		
 		self.panel.SetSizer(boxSizer)
@@ -93,10 +94,7 @@ class VentanaPrincipal(wx.Frame):
 		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
 		html = request.urlopen(req)
 		datos = html.read().decode("utf-8")
-		bs = BeautifulSoup(datos, 'html.parser')
-		
-		for string in bs.stripped_strings:
-			self.resultadoCtrl.AppendText(repr(string))
+		ui.browseableMessage(datos, "Resultado de la búsqueda", True)
 
 class Resultado():
 	def __init__(self, title, snippet, pageid):
