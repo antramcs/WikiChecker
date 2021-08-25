@@ -1,6 +1,7 @@
-# Complemento wikiChecker para NVDA.
-# Autor: Antonio Cascales.
-# Fecha: 7 de marzo de 2021.
+#WikiChecker for NVDA.
+#This file is covered by the GNU General Public License.
+#See the file COPYING.txt for more details.
+#Copyright (C) 2021 Antonio Cascales <antonio.cascales@gmail.com>
 
 import globalPluginHandler
 import ui
@@ -14,7 +15,10 @@ import wx
 import json
 import re
 import sys, os
+
 from threading import Thread
+
+import webbrowser
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,7 +37,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		ventanaPrincipal = VentanaPrincipal(None, "WikiChecker - Ventana Principal")
 		ventanaPrincipal.Show()
 
-class VentanaPrincipal(wx.Frame):
+class VentanaPrincipal(wx.Dialog):
 	def __init__(self, padre, titulo):
 		super(VentanaPrincipal, self).__init__(padre, -1, titulo, size=(1000,700))
 		
@@ -43,26 +47,24 @@ class VentanaPrincipal(wx.Frame):
 		
 		self.etiquetaBuscarLbl = wx.StaticText(self.panel, wx.ID_ANY, "Término a buscar")
 		self.busquedaCtrl = wx.TextCtrl(self.panel, wx.ID_ANY, "", style=wx.TE_PROCESS_ENTER)
-		self.busquedaCtrl.Bind(wx.EVT_TEXT_ENTER, self.onBuscar)
+		self.Bind(wx.EVT_TEXT_ENTER, self.onBuscar, self.busquedaCtrl)
 		
 		self.articulosDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Artículos disponibles")
 		self.listaResultados = wx.ListBox(self.panel, wx.ID_ANY, choices=[], style=wx.LB_SINGLE)
-		self.listaResultados.Bind(wx.EVT_KEY_UP, self.onMostrarArticulo)
+		self.listaResultados.Bind(wx.EVT_LISTBOX, self.onBuscarItem)
 		
-#		self.etiquetaResultadoLbl = wx.StaticText(self.panel, wx.ID_ANY, "Resultado de la búsqueda")
-#		self.resultadoCtrl = wx.TextCtrl(self.panel, wx.ID_ANY, "", style=wx.TE_MULTILINE|wx.TE_READONLY, size=(600,400))
-#		self.resultadoCtrl.Hide()
+		self.areaTexto = wx.TextCtrl(self.panel, wx.ID_ANY, "", style= wx.TE_MULTILINE | wx.TE_READONLY)
 		
-		self.aceptarBtn = wx.Button(self.panel, wx.ID_ANY, "Aceptar")
-		self.aceptarBtn.Bind(wx.EVT_BUTTON, self.onBuscar)
+		self.aceptarBtn = wx.Button(self.panel, wx.ID_OK, "Aceptar")
 		
-		self.cancelarBtn = wx.Button(self.panel, wx.ID_ANY, "Cancelar")
+		self.cancelarBtn = wx.Button(self.panel, wx.ID_CANCEL, "Cancelar")
 		
 		self.panel.SetSizer(boxSizer)
 	
 	def onBuscar(self, event):
 		termino = self.busquedaCtrl.GetValue()
 		self.obtenerInformacion(termino)
+		event.Skip()
 	
 	def eliminarEtiquetas(self, texto):
 		return re.sub(r'<[^>]*?>', '', texto)
@@ -83,18 +85,15 @@ class VentanaPrincipal(wx.Frame):
 		
 		self.listaResultados.SetFocus()
 	
-	def onMostrarArticulo(self, event):
-		if event.GetKeyCode() == 32:
-			opcion = self.listaResultados.GetSelection()
-			pageid = self.resultados[opcion].getPageid()
-			wx.CallAfter(self.obtenerArticulo, pageid)
+	def onBuscarItem(self, event):
+		opcion = self.listaResultados.GetSelection()
+		pageid = self.resultados[opcion].getPageid()
+		
+		wx.CallAfter(self.obtenerArticulo, pageid)
 	
 	def obtenerArticulo(self, pageid):
-		url = "https://es.wikipedia.org/?curid=" + str(pageid)
-		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
-		html = request.urlopen(req)
-		datos = html.read().decode("utf-8")
-		ui.browseableMessage(datos, "Resultado de la búsqueda", True)
+		hilo = HiloConsulta(self, pageid)
+		hilo.start()
 
 class Resultado():
 	def __init__(self, title, snippet, pageid):
@@ -113,3 +112,22 @@ class Resultado():
 	
 	def __str__(self):
 		return self.title + ": " + self.snippet
+
+class HiloConsulta(Thread):
+	def __init__(self, padre, pageid):
+		super(HiloConsulta, self).__init__()
+		
+		self.daemon = True
+		self.padre = padre
+		self.pageid = pageid
+	
+	def run(self):
+#		self.padre.areaTexto.Clear()
+#		
+		url = "https://es.wikipedia.org/?curid=" + str(self.pageid)
+#		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
+#		html = request.urlopen(req)
+#		datos = html.read().decode("utf-8")
+#		
+#		self.padre.areaTexto.write(self.padre.eliminarEtiquetas(datos))
+		webbrowser.open(url)
