@@ -18,8 +18,6 @@ import sys, os
 
 from threading import Thread
 
-import webbrowser
-
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 try:
@@ -115,4 +113,4 @@ class HiloConsulta(Thread):
 
 	def run(self):
 		url = "https://es.wikipedia.org/?curid=" + str(self.pageid)
-		webbrowser.open(url)
+		wx.LaunchDefaultBrowser(url)
