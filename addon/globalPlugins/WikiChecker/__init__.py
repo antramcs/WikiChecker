@@ -14,6 +14,7 @@ from scriptHandler import script
 import wx
 import json
 import re
+import bs4
 import sys, os
 
 from threading import Thread
@@ -43,7 +44,11 @@ class VentanaPrincipal(wx.Dialog):
 		self.busquedaCtrl = wx.TextCtrl(self.panel, 101, "", style=wx.TE_PROCESS_ENTER)
 		self.articulosDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Artículos disponibles")
 		self.listaResultados = wx.ListBox(self.panel, 102, choices=[], style=wx.LB_SINGLE)
+		self.idiomasDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Idiomas disponibles")
+		self.cbIdiomas = wx.ComboBox(self.panel, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
+		self.cbIdiomas.SetSelection(0)
 		self.panel.SetSizer(boxSizer)
+		self.onCargarIdiomas()
 		self.Bind(wx.EVT_CHAR_HOOK, self.OnKeyEvent)
 
 	def OnKeyEvent(self, event):
@@ -64,8 +69,14 @@ class VentanaPrincipal(wx.Dialog):
 	def eliminarEtiquetas(self, texto):
 		return re.sub(r'<[^>]*?>', '', texto)
 
+	def onCargarIdiomas(self):
+		hiloIdiomas = HiloIdiomas(self)
+		hiloIdiomas.start()
+
 	def obtenerInformacion(self, termino):
-		req = request.Request("https://es.wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(termino), data=None, headers={"User-Agent": "Mozilla/5.0"})
+		idiomaSeleccionado = self.cbIdiomas.GetString(self.cbIdiomas.GetSelection()).split(' ')[0]
+		url = "https://" + idiomaSeleccionado[0:-1] + ".wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(termino)
+		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
 		html = request.urlopen(req)
 		datos = html.read().decode("utf-8")
 		diccionario = json.loads(datos)
@@ -114,3 +125,22 @@ class HiloConsulta(Thread):
 	def run(self):
 		url = "https://es.wikipedia.org/?curid=" + str(self.pageid)
 		wx.LaunchDefaultBrowser(url)
+
+class HiloIdiomas(Thread):
+	def __init__(self, padre):
+		super(HiloIdiomas, self).__init__(self)
+		self.daemon = True
+		self.padre = padre
+	
+	def run(self):
+		req = request.Request("https://es.wikipedia.org/wiki/Wikipedia:Lista_completa_de_Wikipedias", data=None, headers={"User-Agent": "Mozilla/5.0"})
+		html = request.urlopen(req)
+		datos = html.read().decode("utf-8")
+		bs = bs4.BeautifulSoup(datos, 'html.parser')
+		filas = bs.find_all('tr')
+		
+		for i in range(1, len(filas)):
+			celdas = filas[i].find_all('td')
+			abreviatura = celdas[0].a.get('title')
+			idioma = celdas[1].a.get('title')
+			self.padre.cbIdiomas.Append("" + abreviatura + " (" + idioma + ")")
