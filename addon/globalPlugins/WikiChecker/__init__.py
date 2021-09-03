@@ -46,7 +46,7 @@ class VentanaPrincipal(wx.Dialog):
 		self.listaResultados = wx.ListBox(self.panel, 102, choices=[], style=wx.LB_SINGLE)
 		self.idiomasDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Idiomas disponibles")
 		self.cbIdiomas = wx.ComboBox(self.panel, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
-		self.cbIdiomas.SetSelection(0)
+		self.cbIdiomas.SetSelection(70)
 		self.panel.SetSizer(boxSizer)
 		self.onCargarIdiomas()
 		self.Bind(wx.EVT_CHAR_HOOK, self.OnKeyEvent)
@@ -75,7 +75,7 @@ class VentanaPrincipal(wx.Dialog):
 
 	def obtenerInformacion(self, termino):
 		idiomaSeleccionado = self.cbIdiomas.GetString(self.cbIdiomas.GetSelection()).split(' ')[0]
-		url = "https://" + idiomaSeleccionado[0:-1] + ".wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(termino)
+		url = "https://" + idiomaSeleccionado + ".wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(termino)
 		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
 		html = request.urlopen(req)
 		datos = html.read().decode("utf-8")
@@ -141,6 +141,6 @@ class HiloIdiomas(Thread):
 		
 		for i in range(1, len(filas)):
 			celdas = filas[i].find_all('td')
-			abreviatura = celdas[0].a.get('title')
-			idioma = celdas[1].a.get('title')
+			abreviatura = celdas[0].a.string
+			idioma = celdas[1].a.string
 			self.padre.cbIdiomas.Append("" + abreviatura + " (" + idioma + ")")
