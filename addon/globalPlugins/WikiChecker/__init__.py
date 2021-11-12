@@ -40,13 +40,12 @@ class VentanaPrincipal(wx.Dialog):
 		super(VentanaPrincipal, self).__init__(padre, -1, titulo, size=(1000,700))
 		self.panel = wx.Panel(self, wx.ID_ANY)
 		boxSizer = wx.BoxSizer(wx.HORIZONTAL)
+		self.idiomasDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Idiomas disponibles")
+		self.lstIdiomas = wx.ListBox(self.panel, wx.ID_ANY, choices=[], style=wx.LB_SINGLE)
 		self.etiquetaBuscarLbl = wx.StaticText(self.panel, wx.ID_ANY, "Término a buscar")
 		self.busquedaCtrl = wx.TextCtrl(self.panel, 101, "", style=wx.TE_PROCESS_ENTER)
 		self.articulosDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Artículos disponibles")
 		self.listaResultados = wx.ListBox(self.panel, 102, choices=[], style=wx.LB_SINGLE)
-		self.idiomasDisponiblesLbl = wx.StaticText(self.panel, wx.ID_ANY, "Idiomas disponibles")
-		self.cbIdiomas = wx.ComboBox(self.panel, wx.ID_ANY, choices=[], style=wx.CB_DROPDOWN)
-		self.cbIdiomas.SetSelection(70)
 		self.panel.SetSizer(boxSizer)
 		self.onCargarIdiomas()
 		self.Bind(wx.EVT_CHAR_HOOK, self.OnKeyEvent)
@@ -74,7 +73,7 @@ class VentanaPrincipal(wx.Dialog):
 		hiloIdiomas.start()
 
 	def obtenerInformacion(self, termino):
-		idiomaSeleccionado = self.cbIdiomas.GetString(self.cbIdiomas.GetSelection()).split(' ')[0]
+		idiomaSeleccionado = self.lstIdiomas.GetString(self.lstIdiomas.GetSelection()).split(' ')[0]
 		url = "https://" + idiomaSeleccionado + ".wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(termino)
 		req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
 		html = request.urlopen(req)
@@ -143,4 +142,4 @@ class HiloIdiomas(Thread):
 			celdas = filas[i].find_all('td')
 			abreviatura = celdas[0].a.string
 			idioma = celdas[1].a.string
-			self.padre.cbIdiomas.Append("" + abreviatura + " (" + idioma + ")")
+			self.padre.lstIdiomas.Append("" + abreviatura + " (" + idioma + ")")
