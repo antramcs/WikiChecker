@@ -30,10 +30,15 @@ from bs4 import BeautifulSoup
 from urllib import request, parse
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
+	ventanaPrincipal = None
+	
 	@script(gesture="kb:NVDA+e")
 	def script_checkWikiTerm(self, gesture):
-		ventanaPrincipal = VentanaPrincipal(None, "WikiChecker - Ventana Principal")
-		ventanaPrincipal.Show()
+		if self.ventanaPrincipal is None:
+			self.ventanaPrincipal = VentanaPrincipal(None, "WikiChecker - Ventana Principal")
+		else:
+			if not self.ventanaPrincipal.IsShown():
+				self.ventanaPrincipal.Show()
 
 class VentanaPrincipal(wx.Dialog):
 	def __init__(self, padre, titulo):
