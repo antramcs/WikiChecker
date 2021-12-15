@@ -10,7 +10,7 @@ import sys, os
 import wx
 import languageHandler
 
-from threading import Thread
+from threading import Thread, Lock
 from bs4 import BeautifulSoup
 from urllib import request, parse
 from .model import *
@@ -27,7 +27,6 @@ class DoANewCheck(Thread):
 	# We initialize the thread, passing it the parent object, the pageid and the language necessary for the check.
 	def __init__(self, parent, pageid, language):
 		super(DoANewCheck, self).__init__()
-		self.daemon = True
 		self.parent = parent
 		self.pageid = pageid
 		self.language = language
@@ -37,40 +36,41 @@ class DoANewCheck(Thread):
 		url = "https://" + self.language + ".wikipedia.org/?curid=" + str(self.pageid)
 		wx.LaunchDefaultBrowser(url)
 
+"""
 # Generate a new thread that retrieves the available languages from Wikipedia.
 class DoLanguageCheck(Thread):
 	# We initialize the thread, passing the parent object as an argument.
 	def __init__(self, parent):
 		super(DoLanguageCheck, self).__init__(self)
-		self.daemon = True
 		self.parent = parent
 
 	# We get the list of available languages. We check it from the Spanish version, for reasons of simplicity for the developer.
 	def run(self):
-		try:
-			req = request.Request("https://es.wikipedia.org/wiki/Wikipedia:Lista_completa_de_Wikipedias", data=None, headers={"User-Agent": "Mozilla/5.0"})
-			html = request.urlopen(req)
-			data = html.read().decode("utf-8")
-		except Exception:
-			print("Error retrieving list of languages from Wikipedia.")
-	
-		bs = BeautifulSoup(data, 'html.parser')
-		rows = bs.find_all('tr')
-		
-		for i in range(1, len(rows)):
-			cells = rows[i].find_all('td')
-			abbreviation = cells[0].a.string
-			name = cells[1].a.string
-			self.parent.languages.append(abbreviation)
-			self.parent.languagesList.Append(name)
+		seguro.acquire()
+		seguro.release()
+"""
 
 # Remove the HTML tags from the text passed as an argument.
 def removeTags(text):
 	return re.sub(r'<[^>]*?>', '', text)
 
 def loadLanguages(parent):
-	languages = DoLanguageCheck(parent)
-	languages.start()
+	try:
+		req = request.Request("https://es.wikipedia.org/wiki/Wikipedia:Lista_completa_de_Wikipedias", data=None, headers={"User-Agent": "Mozilla/5.0"})
+		html = request.urlopen(req)
+		data = html.read().decode("utf-8")
+	except:
+		print("Error retrieving list of languages from Wikipedia.")
+	
+	bs = BeautifulSoup(data, 'html.parser')
+	rows = bs.find_all('tr')
+	
+	for i in range(1, len(rows)):
+		cells = rows[i].find_all('td')
+		abbreviation = cells[0].a.string
+		name = cells[1].a.string
+		parent.languages.append(abbreviation)
+		parent.languagesList.Append(name)
 
 def searchInformation(parent, term):
 	selectedLanguage = parent.languages[parent.languagesList.GetSelection()]

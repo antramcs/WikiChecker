@@ -27,7 +27,6 @@ class MainWindow(wx.Dialog):
 		self.searchTermLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Término a buscar"))
 
 		self.searchTermCtrl = wx.TextCtrl(self.panel, 101, "", style=wx.TE_PROCESS_ENTER)
-		self.searchTermCtrl.SetFocus()
 
 		self.availableArticlesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Artículos disponibles"))
 
@@ -42,8 +41,11 @@ class MainWindow(wx.Dialog):
 
 		self.panel.SetSizer(sizer)
 
-		loadLanguages(self)
-		setDefaultLanguage(self)
+		self.languagesThread = Thread(target=loadLanguages, args=(self,))
+		self.languagesThread.start()
+		self.languagesThread.join()
+		
+#		setDefaultLanguage(self)
 
 		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyEvent)
 
