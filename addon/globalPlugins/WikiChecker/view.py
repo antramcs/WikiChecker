@@ -55,7 +55,7 @@ class MainWindow(wx.Dialog):
 				event.Skip()
 			elif focus == 102:
 				selectedPageid = self.results[self.resultsList.GetSelection()].getPageid()
-				wx.CallAfter(getArticle, self, selectedPageid, self.languages[self.languagesList.GetSelection()].getAbbreviation())
+				wx.CallAfter(getArticle, self, selectedPageid, self.languages[self.languagesList.GetSelection()])
 		if event.GetUnicodeKey() == wx.WXK_ESCAPE:
 			self.searchTermCtrl.Clear()
 			self.Hide()
