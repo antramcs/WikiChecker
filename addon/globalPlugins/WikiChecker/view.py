@@ -41,13 +41,9 @@ class MainWindow(wx.Dialog):
 
 		self.panel.SetSizer(sizer)
 
-		self.languagesThread = Thread(target=loadLanguages, args=(self,))
-		self.languagesThread.start()
-		self.languagesThread.join()
-		
-#		setDefaultLanguage(self)
-
 		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyEvent)
+
+		self.Show()
 
 	# We control the different events that occur.
 	def onKeyEvent(self, event):
@@ -65,3 +61,6 @@ class MainWindow(wx.Dialog):
 			self.Hide()
 		else:
 			event.Skip()
+
+	def loadLanguagesList(self):
+		 loadLanguages(self)

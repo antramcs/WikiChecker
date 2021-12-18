@@ -36,7 +36,6 @@ class DoANewCheck(Thread):
 		url = "https://" + self.language + ".wikipedia.org/?curid=" + str(self.pageid)
 		wx.LaunchDefaultBrowser(url)
 
-"""
 # Generate a new thread that retrieves the available languages from Wikipedia.
 class DoLanguageCheck(Thread):
 	# We initialize the thread, passing the parent object as an argument.
@@ -46,31 +45,32 @@ class DoLanguageCheck(Thread):
 
 	# We get the list of available languages. We check it from the Spanish version, for reasons of simplicity for the developer.
 	def run(self):
-		seguro.acquire()
-		seguro.release()
-"""
+		try:
+			req = request.Request("https://es.wikipedia.org/wiki/Wikipedia:Lista_completa_de_Wikipedias", data=None, headers={"User-Agent": "Mozilla/5.0"})
+			html = request.urlopen(req)
+			data = html.read().decode("utf-8")
+		except:
+			print("Error retrieving list of languages from Wikipedia.")
+		
+		bs = BeautifulSoup(data, 'html.parser')
+		rows = bs.find_all('tr')
+		
+		for i in range(1, len(rows)):
+			cells = rows[i].find_all('td')
+			abbreviation = cells[0].a.string
+			name = cells[1].a.string
+			self.parent.languages.append(abbreviation)
+			self.parent.languagesList.Append(name)
+		
+		print("Total de idiomas cargados en el ListBox:", str(len(self.parent.languagesList.GetItems())))
 
 # Remove the HTML tags from the text passed as an argument.
 def removeTags(text):
 	return re.sub(r'<[^>]*?>', '', text)
 
 def loadLanguages(parent):
-	try:
-		req = request.Request("https://es.wikipedia.org/wiki/Wikipedia:Lista_completa_de_Wikipedias", data=None, headers={"User-Agent": "Mozilla/5.0"})
-		html = request.urlopen(req)
-		data = html.read().decode("utf-8")
-	except:
-		print("Error retrieving list of languages from Wikipedia.")
-	
-	bs = BeautifulSoup(data, 'html.parser')
-	rows = bs.find_all('tr')
-	
-	for i in range(1, len(rows)):
-		cells = rows[i].find_all('td')
-		abbreviation = cells[0].a.string
-		name = cells[1].a.string
-		parent.languages.append(abbreviation)
-		parent.languagesList.Append(name)
+	check = DoLanguageCheck(parent)
+	check.start()
 
 def searchInformation(parent, term):
 	selectedLanguage = parent.languages[parent.languagesList.GetSelection()]

@@ -21,6 +21,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def script_checkWikiTerm(self, gesture):
 		if self.mainWindow is None:
 			self.mainWindow = MainWindow(None, _("WikiChecker - Ventana Principal"))
+			self.mainWindow.loadLanguagesList()
 		else:
 			if not self.mainWindow.IsShown():
 				self.mainWindow.Show()
