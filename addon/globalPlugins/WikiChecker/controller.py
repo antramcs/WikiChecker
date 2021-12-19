@@ -71,6 +71,9 @@ def removeTags(text):
 def loadLanguages(parent):
 	check = DoLanguageCheck(parent)
 	check.start()
+	
+	langThread = Thread(target=setDefaultLanguage, args=(parent,))
+	langThread.start()
 
 def searchInformation(parent, term):
 	selectedLanguage = parent.languages[parent.languagesList.GetSelection()]
@@ -96,5 +99,12 @@ def getArticle(parent, pageid, language):
 
 def setDefaultLanguage(parent):
 	defaultLanguage = languageHandler.getLanguage().split('_')[0]
+	
+	try:
+		while defaultLanguage not in parent.languages:
+			pass
+	except:
+		pass
+	
 	position = parent.languages.index(defaultLanguage)
-	print(position)
+	parent.languagesList.SetSelection(position)
