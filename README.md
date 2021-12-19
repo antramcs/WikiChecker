@@ -1,2 +1,2 @@
 # WikiChecker
-Repositorio para el complemento Buscawiki de NVDA
+Repositorio para el complemento WikiChecker de NVDA
