@@ -43,7 +43,7 @@ class MainWindow(wx.Dialog):
 
 		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyEvent)
 
-		self.Show()
+		# self.Show()
 
 	# We control the different events that occur.
 	def onKeyEvent(self, event):

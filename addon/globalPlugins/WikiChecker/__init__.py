@@ -15,13 +15,13 @@ from .view import *
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
-		self.mainWindow = None
+		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
+		self.mainWindow.loadLanguagesList()
 	
 	@script(gesture="kb:NVDA+e")
 	def script_checkWikiTerm(self, gesture):
-		if self.mainWindow is None:
-			self.mainWindow = MainWindow(None, _("WikiChecker - Ventana Principal"))
-			self.mainWindow.loadLanguagesList()
-		else:
-			if not self.mainWindow.IsShown():
-				self.mainWindow.Show()
+		if not self.mainWindow.IsShown():
+			gui.mainFrame.prePopup()
+			self.mainWindow.Show()
+			self.mainWindow.Centre()
+			gui.mainFrame.postPopup()
