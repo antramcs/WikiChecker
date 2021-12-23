@@ -5,6 +5,7 @@
 
 # We import the necessary modules.
 import wx
+import gui
 
 from .controller import *
 
@@ -43,16 +44,17 @@ class MainWindow(wx.Dialog):
 
 		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyEvent)
 
-		# self.Show()
-
 	# We control the different events that occur.
 	def onKeyEvent(self, event):
 		if event.GetUnicodeKey() == wx.WXK_RETURN:
 			focus = wx.Window.FindFocus().GetId()
 			if focus == 101:
+				if self.searchTermCtrl.GetValue() == "":
+					gui.messageBox(_("El cuadro de búsqueda no puede estar vacío. Debes introducir un término a buscar."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+					return
+				self.results.clear()
 				term = self.searchTermCtrl.GetValue()
-				searchInformation(self, term)
-				event.Skip()
+				wx.CallAfter(searchInformation, self, term)
 			elif focus == 102:
 				selectedPageid = self.results[self.resultsList.GetSelection()].getPageid()
 				wx.CallAfter(getArticle, self, selectedPageid, self.languages[self.languagesList.GetSelection()])
@@ -62,5 +64,6 @@ class MainWindow(wx.Dialog):
 		else:
 			event.Skip()
 
+# Auxiliary function to load the list of available languages correctly in the interface.
 	def loadLanguagesList(self):
 		 loadLanguages(self)
