@@ -83,6 +83,7 @@ def loadLanguages(parent):
 def searchInformation(parent, term):
 	selectedLanguage = parent.languages[parent.languagesList.GetSelection()]
 	url = "https://" + selectedLanguage + ".wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=" + request.quote(term)
+
 	req = request.Request(url, data=None, headers={"User-Agent": "Mozilla/5.0"})
 	try:
 		html = request.urlopen(req)
@@ -90,9 +91,14 @@ def searchInformation(parent, term):
 		gui.messageBox(_("No se han podido obtener los artículos disponibles."), caption=_("¡Error!"), style=wx.ICON_ERROR)
 		return
 
-	data = html.read().decode("utf-8")
-	diccionario = json.loads(data)
-	info = diccionario["query"]["search"]
+	try:
+		data = html.read().decode("utf-8")
+		diccionario = json.loads(data)
+		info = diccionario["query"]["search"]
+	except:
+		gui.messageBox(_("No existen artículos disponibles para el término introducido."), caption="¡Error!", style=wx.ICON_ERROR)
+		return
+
 	parent.resultsList.Clear()
 	for i in info:
 		result = Result(i["title"], removeTags(i["snippet"]), i["pageid"])
@@ -105,6 +111,8 @@ def searchInformation(parent, term):
 def getArticle(parent, pageid, language):
 	check = DoANewCheck(parent, pageid, language)
 	check.start()
+	parent.searchTermCtrl.Clear()
+	parent.Hide()
 
 # Sets the default language of the user in the interface languages list.
 def setDefaultLanguage(parent):
