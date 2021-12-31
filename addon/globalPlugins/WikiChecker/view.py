@@ -21,15 +21,15 @@ class MainWindow(wx.Dialog):
 
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-		self.availableLanguagesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Idiomas disponibles"))
+		self.availableLanguagesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("&Idiomas disponibles"))
 
 		self.languagesList = wx.Choice(self.panel, wx.ID_ANY, choices=[])
 
-		self.searchTermLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Término a buscar"))
+		self.searchTermLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Término a &buscar"))
 
 		self.searchTermCtrl = wx.TextCtrl(self.panel, 101, "", style=wx.TE_PROCESS_ENTER)
 
-		self.availableArticlesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Artículos disponibles"))
+		self.availableArticlesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("&Artículos disponibles"))
 
 		self.resultsList = wx.ListBox(self.panel, 102, choices=[], style=wx.LB_SINGLE)
 
@@ -60,6 +60,7 @@ class MainWindow(wx.Dialog):
 				wx.CallAfter(getArticle, self, selectedPageid, self.languages[self.languagesList.GetSelection()])
 		if event.GetUnicodeKey() == wx.WXK_ESCAPE:
 			self.searchTermCtrl.Clear()
+			self.resultsList.Clear()
 			self.Hide()
 		else:
 			event.Skip()

@@ -66,7 +66,7 @@ class DoLanguageCheck(Thread):
 				self.parent.languages.append(abbreviation)
 				self.parent.languagesList.Append(name)
 		except:
-			gui.messageBox(_("Imposible recuperar el listado de artículos de Wikipedia."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+			gui.messageBox(_("Imposible recuperar el listado de idiomas de Wikipedia."), caption=_("¡Error!"), style=wx.ICON_ERROR)
 			return
 
 # Remove the HTML tags from the text passed as an argument.
@@ -96,6 +96,7 @@ def searchInformation(parent, term):
 		result = Result(i["title"], removeTags(i["snippet"]), i["pageid"])
 		parent.results.append(result)
 		parent.resultsList.AppendItems(str(result))
+	parent.resultsList.Enabled = True
 	parent.resultsList.SetFocus()
 
 # Displays the article selected by the user in the user's default browser.
