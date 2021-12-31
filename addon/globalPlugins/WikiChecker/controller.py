@@ -65,6 +65,8 @@ class DoLanguageCheck(Thread):
 				name = cells[1].a.string
 				self.parent.languages.append(abbreviation)
 				self.parent.languagesList.Append(name)
+
+			wx.CallAfter(setDefaultLanguage, self.parent)
 		except:
 			gui.messageBox(_("Imposible recuperar el listado de idiomas de Wikipedia."), caption=_("¡Error!"), style=wx.ICON_ERROR)
 			return
