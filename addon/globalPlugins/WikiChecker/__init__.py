@@ -3,6 +3,7 @@
 #See the file COPYING.txt for more details.
 #Copyright (C) 2021 Antonio Cascales <antonio.cascales@gmail.com>
 
+# We import the modules necessary for the operation of the plugin.
 import globalPluginHandler
 import ui
 import api
@@ -19,23 +20,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
 		self.mainWindow.loadLanguagesList()
 
-	@script(gesture="kb:NVDA+e")
+	@script(gesture=None, description=_("Busca los artículos relacionados con el término introducido en Wikipedia."), category=_("WikiChecker"))
 	def script_checkWikiTerm(self, gesture):
 		if not self.mainWindow.IsShown():
 			gui.mainFrame.prePopup()
-			try:
-				defaultLanguage = languageHandler.GetLanguage()[:2]
-				position = self.mainWindow.languages.index(defaultLanguage)
-				self.mainWindow.languagesList.SetSelection(position)
-			except:
-				pass
-
-			if self.mainWindow.languagesList.GetSelection() == -1:
-				self.mainWindow.languagesList.SetFocus()
-			else:
-				self.mainWindow.searchTermCtrl.SetFocus()
-
-			self.mainWindow.resultsList.Enabled = False
 			self.mainWindow.Show()
+			self.mainWindow.searchTermCtrl.SetFocus()
+			self.mainWindow.resultsList.Enabled = False
+			self.mainWindow.resultsList.SetItems([])
 			self.mainWindow.CenterOnScreen()
 			gui.mainFrame.postPopup()
