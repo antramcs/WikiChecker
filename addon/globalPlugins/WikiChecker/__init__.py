@@ -9,6 +9,8 @@ import ui
 import api
 import gui
 import languageHandler
+import globalVars
+import config
 
 from scriptHandler import script
 
@@ -17,6 +19,10 @@ from .view import *
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
+
+		if globalVars.appArgs.secure or config.isAppX:
+			return
+
 		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
 		self.mainWindow.loadLanguagesList()
 

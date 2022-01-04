@@ -29,6 +29,8 @@ class DoANewCheck(Thread):
 	# We initialize the thread, passing it the parent object, the pageid and the language necessary for the check.
 	def __init__(self, parent, pageid, language):
 		super(DoANewCheck, self).__init__()
+		self.daemon = True
+
 		self.parent = parent
 		self.pageid = pageid
 		self.language = language
@@ -43,6 +45,8 @@ class DoLanguageCheck(Thread):
 	# We initialize the thread, passing the parent object as an argument.
 	def __init__(self, parent):
 		super(DoLanguageCheck, self).__init__()
+		self.daemon = True
+
 		self.parent = parent
 
 	# We get the list of available languages. We check it from the Spanish version, for reasons of simplicity for the developer.
