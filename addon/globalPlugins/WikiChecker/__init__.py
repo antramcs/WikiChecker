@@ -11,6 +11,7 @@ import gui
 import languageHandler
 import globalVars
 import config
+import core
 
 from scriptHandler import script
 
@@ -24,7 +25,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			return
 
 		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
-		self.mainWindow.loadLanguagesList()
+
+		core.postNvdaStartup.register(self.postStartupHandler)
 
 	@script(gesture=None, description=_("Busca los artículos relacionados con el término introducido en Wikipedia."), category=_("WikiChecker"))
 	def script_checkWikiTerm(self, gesture):
@@ -36,3 +38,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			self.mainWindow.resultsList.SetItems([])
 			self.mainWindow.CenterOnScreen()
 			gui.mainFrame.postPopup()
+
+	def posStartupHandler(self):
+		self.mainWindow.loadLanguagesList()
+
+	def terminate(self):
+		core.postNvdaStartup.unregister(self.postStartupHandler)
