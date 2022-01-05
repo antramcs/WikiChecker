@@ -5,7 +5,7 @@
 
 # Stores the information about a result obtained in the query.
 class Result():
-	
+
 	# Initializes the Result object, passing it as arguments the title, the snippet and the pageid.
 	def __init__(self, title, snippet, pageid):
 		self.title = title
@@ -30,7 +30,7 @@ class Result():
 
 # Stores information about a specific language from Wikipedia.
 class Language():
-	
+
 	# Initializes the Language object, passing it as arguments the abbreviation and the name.
 	def __init__(self, abbreviation, name):
 		self.abbreviation = abbreviation

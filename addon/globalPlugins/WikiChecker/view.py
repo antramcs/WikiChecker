@@ -9,6 +9,8 @@ import gui
 
 from .controller import *
 
+addonHandler.InitTranslation()
+
 # Displays the main plugin window.
 class MainWindow(wx.Dialog):
 	# We initialize the window, passing the parent object and its title as arguments.

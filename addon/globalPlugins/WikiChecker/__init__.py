@@ -17,6 +17,8 @@ from scriptHandler import script
 
 from .view import *
 
+addonHandler.InitTranslation()
+
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
@@ -39,7 +41,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			self.mainWindow.CenterOnScreen()
 			gui.mainFrame.postPopup()
 
-	def posStartupHandler(self):
+	def postStartupHandler(self):
 		self.mainWindow.loadLanguagesList()
 
 	def terminate(self):

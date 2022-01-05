@@ -24,6 +24,8 @@ from bs4 import BeautifulSoup
 from urllib import request, parse
 from .model import *
 
+addonHandler.InitTranslation()
+
 # Generates a new thread with which to display the selected Wikipedia article.
 class DoANewCheck(Thread):
 	# We initialize the thread, passing it the parent object, the pageid and the language necessary for the check.
@@ -100,7 +102,7 @@ def searchInformation(parent, term):
 		diccionario = json.loads(data)
 		info = diccionario["query"]["search"]
 	except:
-		gui.messageBox(_("No existen artículos disponibles para el término introducido."), caption="¡Error!", style=wx.ICON_ERROR)
+		gui.messageBox(_("No existen artículos disponibles para el término introducido."), caption=_("¡Error!"), style=wx.ICON_ERROR)
 		return
 
 	parent.resultsList.Clear()
