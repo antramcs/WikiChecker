@@ -10,6 +10,7 @@ import sys, os
 import wx
 import languageHandler
 import addonHandler
+import gui
 
 # We define the path where the bs4 module and the like should be searched.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -102,8 +103,13 @@ def searchInformation(parent, term):
 		data = html.read().decode("utf-8")
 		diccionario = json.loads(data)
 		info = diccionario["query"]["search"]
+
+		if len(info) == 0:
+			wx.CallAfter(gui.messageBox, _("No existen artículos disponibles que cumplan los criterios indicados."), _("¡Error!"), wx.ICON_ERROR)
+			return
+
 	except:
-		wx.CallAfter(gui.messageBox, _("No existen artículos disponibles para el término introducido."), _("¡Error!"), wx.ICON_ERROR)
+		wx.CallAfter(gui.messageBox, _("No se ha podido procesar la respuesta de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
 		return
 
 	parent.resultsList.Clear()
