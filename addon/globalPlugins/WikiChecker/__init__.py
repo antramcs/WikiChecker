@@ -12,12 +12,13 @@ import languageHandler
 import globalVars
 import config
 import core
+import addonHandler
 
 from scriptHandler import script
 
 from .view import *
 
-addonHandler.InitTranslation()
+addonHandler.initTranslation()
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):

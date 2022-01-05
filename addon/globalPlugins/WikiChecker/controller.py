@@ -9,6 +9,7 @@ import re
 import sys, os
 import wx
 import languageHandler
+import addonHandler
 
 # We define the path where the bs4 module and the like should be searched.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ from bs4 import BeautifulSoup
 from urllib import request, parse
 from .model import *
 
-addonHandler.InitTranslation()
+addonHandler.initTranslation()
 
 # Generates a new thread with which to display the selected Wikipedia article.
 class DoANewCheck(Thread):

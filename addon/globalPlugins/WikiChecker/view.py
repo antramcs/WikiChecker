@@ -6,10 +6,11 @@
 # We import the necessary modules.
 import wx
 import gui
+import addonHandler
 
 from .controller import *
 
-addonHandler.InitTranslation()
+addonHandler.initTranslation()
 
 # Displays the main plugin window.
 class MainWindow(wx.Dialog):
