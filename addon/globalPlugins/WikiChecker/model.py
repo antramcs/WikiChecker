@@ -27,23 +27,3 @@ class Result():
 	# Returns the title and snippet of the correctly formatted result for display.
 	def __str__(self):
 		return self.title + ": " + self.snippet
-
-# Stores information about a specific language from Wikipedia.
-class Language():
-
-	# Initializes the Language object, passing it as arguments the abbreviation and the name.
-	def __init__(self, abbreviation, name):
-		self.abbreviation = abbreviation
-		self.name = name
-
-	# Returns the abbreviation of the language.
-	def getAbbreviation(self):
-		return self.abbreviation
-
-	# Returns the name of the language.
-	def getName(self):
-		return self.name
-
-	# Returns the abbreviation and name of the language correctly formatted for display.
-	def __str__(self):
-		return self.abbreviation + ": " + self.name

@@ -57,7 +57,7 @@ class DoLanguageCheck(Thread):
 		try:
 			html = request.urlopen(req)
 		except:
-			gui.messageBox(_("No se ha podido recuperar la lista de idiomas de Wikipedia."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+			wx.CallAfter(gui.messageBox, _("No se ha podido recuperar la lista de idiomas de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
 			return
 
 		try:
@@ -74,7 +74,7 @@ class DoLanguageCheck(Thread):
 
 			wx.CallAfter(setDefaultLanguage, self.parent)
 		except:
-			gui.messageBox(_("Imposible recuperar el listado de idiomas de Wikipedia."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+			wx.CallAfter(gui.messageBox, _("Imposible recuperar el listado de idiomas de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
 			return
 
 # Remove the HTML tags from the text passed as an argument.
@@ -94,7 +94,7 @@ def searchInformation(parent, term):
 	try:
 		html = request.urlopen(req)
 	except:
-		gui.messageBox(_("No se han podido obtener los artículos disponibles."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+		wx.CallAfter(gui.messageBox, _("No se han podido obtener los artículos disponibles."), _("¡Error!"), wx.ICON_ERROR)
 		return
 
 	try:
@@ -102,7 +102,7 @@ def searchInformation(parent, term):
 		diccionario = json.loads(data)
 		info = diccionario["query"]["search"]
 	except:
-		gui.messageBox(_("No existen artículos disponibles para el término introducido."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+		wx.CallAfter(gui.messageBox, _("No existen artículos disponibles para el término introducido."), _("¡Error!"), wx.ICON_ERROR)
 		return
 
 	parent.resultsList.Clear()
