@@ -28,11 +28,15 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			return
 
 		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
-
+		if hasattr(globalVars, 'wikiChecker'):
+			self.postStartupHandler()
 		core.postNvdaStartup.register(self.postStartupHandler)
+		globalVars.wikiChecker = None
 
 	@script(gesture=None, description=_("Busca los artículos relacionados con el término introducido en Wikipedia."), category=_("WikiChecker"))
 	def script_checkWikiTerm(self, gesture):
+		if len(self.mainWindow.languages)==0:
+			self.mainWindow.loadLanguagesList()
 		if not self.mainWindow.IsShown():
 			gui.mainFrame.prePopup()
 			self.mainWindow.Show()

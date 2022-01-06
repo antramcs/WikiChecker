@@ -11,7 +11,7 @@ import wx
 import languageHandler
 import addonHandler
 import gui
-
+from logHandler import log
 # We define the path where the bs4 module and the like should be searched.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -59,7 +59,7 @@ class DoLanguageCheck(Thread):
 		try:
 			html = request.urlopen(req)
 		except:
-			wx.CallAfter(gui.messageBox, _("No se ha podido recuperar la lista de idiomas de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
+			log.error("No se ha podido cargar la lista de idiomas de Wikipedia")
 			return
 
 		try:
@@ -76,7 +76,7 @@ class DoLanguageCheck(Thread):
 
 			wx.CallAfter(setDefaultLanguage, self.parent)
 		except:
-			wx.CallAfter(gui.messageBox, _("Imposible recuperar el listado de idiomas de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
+			log.error("Imposible recuperar el listado de idiomas de Wikipedia.")
 			return
 
 # Remove the HTML tags from the text passed as an argument.

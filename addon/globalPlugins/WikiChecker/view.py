@@ -49,7 +49,7 @@ class MainWindow(wx.Dialog):
 
 	# We control the different events that occur.
 	def onKeyEvent(self, event):
-		if event.GetUnicodeKey() == wx.WXK_RETURN:
+		if event.GetUnicodeKey() in [wx.WXK_RETURN, wx.WXK_NUMPAD_ENTER]:
 			focus = wx.Window.FindFocus().GetId()
 			if focus == 101:
 				if self.searchTermCtrl.GetValue() == "":
