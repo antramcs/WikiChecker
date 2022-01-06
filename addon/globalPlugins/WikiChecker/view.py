@@ -55,6 +55,9 @@ class MainWindow(wx.Dialog):
 				if self.searchTermCtrl.GetValue() == "":
 					gui.messageBox(_("El cuadro de búsqueda no puede estar vacío. Debes introducir un término a buscar."), caption=_("¡Error!"), style=wx.ICON_ERROR)
 					return
+				if self.languagesList.GetSelection() == -1:
+					gui.messageBox(_("Debes seleccionar un idioma de entre los disponibles antes de realizar la consulta. En caso de no haber ninguno disponible, comprueba tu conexión a Internet, o reinicia NVDA."), caption=_("¡Error!"), style=wx.ICON_ERROR)
+					return
 				self.results.clear()
 				term = self.searchTermCtrl.GetValue()
 				wx.CallAfter(searchInformation, self, term)
