@@ -19,10 +19,11 @@ class MainWindow(wx.Dialog):
 		super(MainWindow, self).__init__(parent, -1, title, size=(1000,700))
 		self.results = []
 		self.languages = []
+		self.okLanguages = False
 
 		self.panel = wx.Panel(self, wx.ID_ANY)
 
-		sizer = wx.BoxSizer(wx.HORIZONTAL)
+		sizer = wx.BoxSizer(wx.VERTICAL)
 
 		self.availableLanguagesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("&Idiomas disponibles"))
 

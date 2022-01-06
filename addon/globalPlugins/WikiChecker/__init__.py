@@ -13,7 +13,7 @@ import globalVars
 import config
 import core
 import addonHandler
-
+import ui
 from scriptHandler import script
 
 from .view import *
@@ -37,14 +37,21 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def script_checkWikiTerm(self, gesture):
 		if len(self.mainWindow.languages)==0:
 			self.mainWindow.loadLanguagesList()
-		if not self.mainWindow.IsShown():
-			gui.mainFrame.prePopup()
-			self.mainWindow.Show()
-			self.mainWindow.searchTermCtrl.SetFocus()
-			self.mainWindow.resultsList.Enabled = False
-			self.mainWindow.resultsList.SetItems([])
-			self.mainWindow.CenterOnScreen()
-			gui.mainFrame.postPopup()
+		if self.mainWindow.okLanguages:
+			if not self.mainWindow.IsShown():
+				gui.mainFrame.prePopup()
+				self.mainWindow.Show()
+				self.mainWindow.searchTermCtrl.SetFocus()
+				self.mainWindow.resultsList.Enabled = False
+				self.mainWindow.resultsList.SetItems([])
+				self.mainWindow.CenterOnScreen()
+				gui.mainFrame.postPopup()
+		else:
+			msg = \
+_("""No se pudieron cargar los idiomas del complemento. Vuelve a intentarlo en unos segundos.
+
+Si el problema persiste comprueba tu conexión a Internet, o reinicia NVDA.""")
+			ui.message(msg)
 
 	def postStartupHandler(self):
 		self.mainWindow.loadLanguagesList()
