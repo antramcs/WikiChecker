@@ -30,20 +30,12 @@ No existen atajos de teclas rápidas preasignados, de forma que cada usuario pue
 
 Una vez dentro de la interfaz del complemento, sí existen tres combinaciones de teclas preasignadas, de forma que podamos movernos con rapidez entre los distintos elementos de la misma:
 
-* Alt + B: Nos posiciona encima del cuadro de edición para escribir el término a buscar.
-* Alt + I: Nos posiciona encima de la lista de idiomas disponibles, para que podamos escoger un idioma diferente al predeterminado por defecto, o bien, en caso de no existir el idioma predeterminado en NVDA, para que escojamos uno en el cual realizar la búsqueda.
-* Alt + A: Nos posiciona encima de la lista de artículos disponibles, a fin de que escojamos uno de los resultados arrojados por la consulta en Wikipedia.
+· Alt + B: Nos posiciona encima del cuadro de edición para escribir el término a buscar.
+· Alt + I: Nos posiciona encima de la lista de idiomas disponibles, para que podamos escoger un idioma diferente al predeterminado por defecto, o bien, en caso de no existir el idioma predeterminado en NVDA, para que escojamos uno en el cual realizar la búsqueda.
+· Alt + A: Nos posiciona encima de la lista de artículos disponibles, a fin de que escojamos uno de los resultados arrojados por la consulta en Wikipedia.
 
 
 ## Registro de cambios.
-
-### Version 1.1.
-
-* Añadida la posibilidad de que WikiChecker funcione en ordenadores que trabajen bajo servidores proxi.
-* Añadida una comprobación adicional que impida lanzar consultas a Wikipedia si no se ha escogido un idioma de entre los disponibles previamente.
-* Añadidas comprobaciones adicionales en la carga de los idiomas disponibles a fin de evitar un mal funcionamiento del complemento.
-* Corrección de errores y optimización del código desde la versión anterior.
-
 
 ### Versión 1.0.
 
