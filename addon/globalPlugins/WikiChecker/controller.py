@@ -59,6 +59,7 @@ class DoLanguageCheck(Thread):
 		try:
 			html = request.urlopen(req)
 		except:
+			self.parent.okLanguages = False
 			log.error("No se ha podido cargar la lista de idiomas de Wikipedia")
 			return
 
@@ -74,8 +75,10 @@ class DoLanguageCheck(Thread):
 				self.parent.languages.append(abbreviation)
 				self.parent.languagesList.Append(name)
 
+			self.parent.okLanguages = True
 			wx.CallAfter(setDefaultLanguage, self.parent)
 		except:
+			self.parent.okLanguages = False
 			log.error("Imposible recuperar el listado de idiomas de Wikipedia.")
 			return
 
