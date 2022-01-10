@@ -37,7 +37,7 @@ Una vez dentro de la interfaz del complemento, sí existen tres combinaciones de
 
 ## Registro de cambios.
 
-### Version 1.1.
+### Versión 1.1.
 
 * Añadida la posibilidad de que WikiChecker funcione en ordenadores que trabajen bajo servidores proxi.
 * Añadida una comprobación adicional que impida lanzar consultas a Wikipedia si no se ha escogido un idioma de entre los disponibles previamente.
