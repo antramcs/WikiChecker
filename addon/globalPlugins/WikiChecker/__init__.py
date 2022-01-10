@@ -13,7 +13,7 @@ import globalVars
 import config
 import core
 import addonHandler
-import ui
+
 from scriptHandler import script
 
 from .view import *
@@ -37,7 +37,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def script_checkWikiTerm(self, gesture):
 		if len(self.mainWindow.languages)==0:
 			self.mainWindow.loadLanguagesList()
-		if self.mainWindow.okLanguages:
+		elif self.mainWindow.okLanguages:
 			if not self.mainWindow.IsShown():
 				gui.mainFrame.prePopup()
 				self.mainWindow.Show()

@@ -12,6 +12,7 @@ import languageHandler
 import addonHandler
 import gui
 from logHandler import log
+
 # We define the path where the bs4 module and the like should be searched.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
