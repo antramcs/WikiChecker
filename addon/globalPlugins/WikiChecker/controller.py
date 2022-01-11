@@ -122,7 +122,7 @@ def searchInformation(parent, term):
 		parent.results.append(result)
 		parent.resultsList.AppendItems(str(result))
 	parent.resultsList.Enabled = True
-	parent.ReadArticleBtn.Enabled = True
+	parent.readArticleBtn.Enabled = True
 	parent.resultsList.SetFocus()
 
 # Displays the article selected by the user in the user's default browser.
