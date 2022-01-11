@@ -44,6 +44,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				self.mainWindow.searchTermCtrl.SetFocus()
 				self.mainWindow.resultsList.Enabled = False
 				self.mainWindow.resultsList.SetItems([])
+				self.mainWindow.readArticleBtn.Enabled = False
 				self.mainWindow.CenterOnScreen()
 				gui.mainFrame.postPopup()
 		else:
