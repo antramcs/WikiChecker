@@ -33,6 +33,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		core.postNvdaStartup.register(self.postStartupHandler)
 		globalVars.wikiChecker = None
 
+		self.menu = gui.mainFrame.sysTrayIcon.toolsMenu
+		self.wikiMenu = self.menu.Append(wx.ID_ANY, "&WikiChecker")
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onStart, self.wikiMenu)
+
 	@script(gesture=None, description=_("Busca los artículos relacionados con el término introducido en Wikipedia."), category=_("WikiChecker"))
 	def script_checkWikiTerm(self, gesture):
 		if len(self.mainWindow.languages)==0:
@@ -57,5 +61,12 @@ Si el problema persiste comprueba tu conexión a Internet, o reinicia NVDA.""")
 	def postStartupHandler(self):
 		self.mainWindow.loadLanguagesList()
 
+	def onStart(self, event):
+		self.script_checkWikiTerm(None)
+
 	def terminate(self):
 		core.postNvdaStartup.unregister(self.postStartupHandler)
+
+		self.menu.Remove(self.wikiMenu.Id)
+		self.wikiMenu.Destroy()
+		self.wikiMenu = None
