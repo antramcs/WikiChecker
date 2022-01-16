@@ -101,9 +101,9 @@ def searchInformation(parent, term):
 	try:
 		html = request.urlopen(req)
 	except:
-		# Traductors: Message shown to the user in case the query cannot be made on Wikipedia.
+		# Translators: Message shown to the user in case the query cannot be made on Wikipedia.
 		wx.CallAfter(gui.messageBox, _("No se ha podido realizar la consulta en wikipedia."),
-		# Traductors: Title of the error message.
+		# Translators: Title of the error message.
 		_("¡Error!"), wx.ICON_ERROR)
 		return
 
@@ -113,16 +113,16 @@ def searchInformation(parent, term):
 		info = diccionario["query"]["search"]
 
 		if len(info) == 0:
-			# Traductors: message that is shown to the user in case there are no articles that meet the specified criteria.
+			# Translators: message that is shown to the user in case there are no articles that meet the specified criteria.
 			wx.CallAfter(gui.messageBox, _("No existen artículos disponibles que cumplan los criterios indicados."),
-		# Traductors: Title of the error message.
+		# Translators: Title of the error message.
 		_("¡Error!"), wx.ICON_ERROR)
 			return
 
 	except:
-		# Traductors: message that is shown to the user if for some reason, the Wikipedia query fails for unforeseen reasons.
+		# Translators: message that is shown to the user if for some reason, the Wikipedia query fails for unforeseen reasons.
 		wx.CallAfter(gui.messageBox, _("No se ha podido procesar la respuesta de Wikipedia."),
-		# Traductors: Title of the error message.
+		# Translators: Title of the error message.
 		_("¡Error!"), wx.ICON_ERROR)
 		return
 

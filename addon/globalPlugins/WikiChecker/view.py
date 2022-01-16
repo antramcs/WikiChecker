@@ -26,26 +26,26 @@ class MainWindow(wx.Dialog):
 
 		sizer = wx.BoxSizer(wx.VERTICAL)
 
-		# Traductors: Label name of the list of available languages.
+		# Translators: Label name of the list of available languages.
 		self.availableLanguagesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("&Idiomas disponibles"))
 
 		self.languagesList = wx.Choice(self.panel, wx.ID_ANY, choices=[])
 
-		# Traductors: Label name of the search edit box.
+		# Translators: Label name of the search edit box.
 		self.searchTermLbl = wx.StaticText(self.panel, wx.ID_ANY, _("Término a &buscar"))
 
 		self.searchTermCtrl = wx.TextCtrl(self.panel, 101, "", style=wx.TE_PROCESS_ENTER)
 
-		# Traductors: Label name of the 'Search' button.
-		self.searchBtn = wx.Button(self.panel, 103, _("Buscar"))
+		# Translators: Label name of the 'Search' button.
+		self.searchBtn = wx.Button(self.panel, 103, _("Bu&scar"))
 
-		# Traductors: Label name of the list of available items.
+		# Translators: Label name of the list of available items.
 		self.availableArticlesLbl = wx.StaticText(self.panel, wx.ID_ANY, _("&Artículos disponibles"))
 
 		self.resultsList = wx.ListBox(self.panel, 102, choices=[], style=wx.LB_SINGLE)
 
-		# Traductors: Label name of the 'Read Article' button.
-		self.readArticleBtn = wx.Button(self.panel, 104, _("Leer artículo"))
+		# Translators: Label name of the 'Read Article' button.
+		self.readArticleBtn = wx.Button(self.panel, 104, _("&Leer artículo"))
 
 		sizer.Add(self.availableLanguagesLbl, 0, wx.EXPAND)
 		sizer.Add(self.languagesList, 0, wx.EXPAND)
@@ -84,15 +84,15 @@ class MainWindow(wx.Dialog):
 # Function that executes the relevant code to make the query in wikipedia.
 	def onSearchInformation(self, event):
 		if self.searchTermCtrl.GetValue() == "":
-			# Traductors: Message shown to the user if they have not typed any term to search for in the edit box.
+			# Translators: Message shown to the user if they have not typed any term to search for in the edit box.
 			gui.messageBox(_("El cuadro de búsqueda no puede estar vacío. Debes introducir un término a buscar."),
-			# Traductors: Title of the error message.
+			# Translators: Title of the error message.
 			caption=_("¡Error!"), style=wx.ICON_ERROR)
 			return
 		if self.languagesList.GetSelection() == -1:
-			# Traductors: Message shown to the user if they have not selected a language from among the available ones.
+			# Translators: Message shown to the user if they have not selected a language from among the available ones.
 			gui.messageBox(_("Debes seleccionar un idioma de entre los disponibles antes de realizar la consulta. En caso de no haber ninguno disponible, comprueba tu conexión a Internet, o reinicia NVDA."),
-			# Traductors: Title of the error message.
+			# Translators: Title of the error message.
 			caption=_("¡Error!"), style=wx.ICON_ERROR)
 			return
 		self.results.clear()

@@ -40,7 +40,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.wikiMenu = self.menu.Append(wx.ID_ANY, "&WikiChecker")
 		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onStart, self.wikiMenu)
 
-	@script(gesture=None, description=_("Busca los artículos relacionados con el término introducido en Wikipedia."), category=_("WikiChecker"))
+	@script(gesture=None,
+	# Translators: Description of the plugin.
+	description=_("Busca los artículos relacionados con el término introducido en Wikipedia."),
+	# Translators: Plugin category name.
+	category=_("WikiChecker"))
 	def script_checkWikiTerm(self, gesture):
 		if len(self.mainWindow.languages)==0:
 			self.mainWindow.loadLanguagesList()
@@ -55,7 +59,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				self.mainWindow.CenterOnScreen()
 				gui.mainFrame.postPopup()
 		else:
-			# Translators: Mensaje que se muestra al usuario en caso de no ser posible cargar los idiomas disponibles en wikipedia.
+			# Translators: Message shown to the user if it is not possible to load the languages ​​available in wikipedia.
 			msg = \
 _("""No se pudieron cargar los idiomas del complemento. Vuelve a intentarlo en unos segundos.
 
