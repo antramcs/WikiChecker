@@ -27,6 +27,7 @@ from bs4 import BeautifulSoup
 from urllib import request, parse
 from .model import *
 
+# We call the function in charge of translations.
 addonHandler.initTranslation()
 
 # Generates a new thread with which to display the selected Wikipedia article.
@@ -100,7 +101,10 @@ def searchInformation(parent, term):
 	try:
 		html = request.urlopen(req)
 	except:
-		wx.CallAfter(gui.messageBox, _("No se han podido obtener los artículos disponibles."), _("¡Error!"), wx.ICON_ERROR)
+		# Traductors: Message shown to the user in case the query cannot be made on Wikipedia.
+		wx.CallAfter(gui.messageBox, _("No se ha podido realizar la consulta en wikipedia."),
+		# Traductors: Title of the error message.
+		_("¡Error!"), wx.ICON_ERROR)
 		return
 
 	try:
@@ -109,11 +113,17 @@ def searchInformation(parent, term):
 		info = diccionario["query"]["search"]
 
 		if len(info) == 0:
-			wx.CallAfter(gui.messageBox, _("No existen artículos disponibles que cumplan los criterios indicados."), _("¡Error!"), wx.ICON_ERROR)
+			# Traductors: message that is shown to the user in case there are no articles that meet the specified criteria.
+			wx.CallAfter(gui.messageBox, _("No existen artículos disponibles que cumplan los criterios indicados."),
+		# Traductors: Title of the error message.
+		_("¡Error!"), wx.ICON_ERROR)
 			return
 
 	except:
-		wx.CallAfter(gui.messageBox, _("No se ha podido procesar la respuesta de Wikipedia."), _("¡Error!"), wx.ICON_ERROR)
+		# Traductors: message that is shown to the user if for some reason, the Wikipedia query fails for unforeseen reasons.
+		wx.CallAfter(gui.messageBox, _("No se ha podido procesar la respuesta de Wikipedia."),
+		# Traductors: Title of the error message.
+		_("¡Error!"), wx.ICON_ERROR)
 		return
 
 	parent.resultsList.Clear()

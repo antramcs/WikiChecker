@@ -18,6 +18,7 @@ from scriptHandler import script
 
 from .view import *
 
+# We call the function in charge of translations.
 addonHandler.initTranslation()
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
@@ -27,12 +28,14 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if globalVars.appArgs.secure or config.isAppX:
 			return
 
+		# Translators: Name of the plugin's main window.
 		self.mainWindow = MainWindow(gui.mainFrame, _("WikiChecker - Ventana Principal"))
 		if hasattr(globalVars, 'wikiChecker'):
 			self.postStartupHandler()
 		core.postNvdaStartup.register(self.postStartupHandler)
 		globalVars.wikiChecker = None
 
+		# We created an option within the Tools submenu of the NVDA menu, so that the user can call it from there.
 		self.menu = gui.mainFrame.sysTrayIcon.toolsMenu
 		self.wikiMenu = self.menu.Append(wx.ID_ANY, "&WikiChecker")
 		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onStart, self.wikiMenu)
@@ -52,6 +55,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				self.mainWindow.CenterOnScreen()
 				gui.mainFrame.postPopup()
 		else:
+			# Translators: Mensaje que se muestra al usuario en caso de no ser posible cargar los idiomas disponibles en wikipedia.
 			msg = \
 _("""No se pudieron cargar los idiomas del complemento. Vuelve a intentarlo en unos segundos.
 
