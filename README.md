@@ -42,7 +42,7 @@ Una vez dentro de la interfaz del complemento, sí existen varias combinaciones 
 ### Versión 1.2.
 
 * añadidos dos botones, 'Buscar' y 'Leer artículo', para que aquellos usuarios que están más acostumbrados a utilizar estos elementos no se sientan desorientados al usar la interfaz.
-* Añadidas las traducciones al portugués y francés. Gracias a Ângelo Miguel Abrantes y Remy ruiz respectivamente.
+* Añadidas las traducciones al portugués y francés. Gracias a Ângelo Miguel Abrantes y Rémy Ruiz respectivamente.
 * Modificada la lista de idiomas para que se muestren en inglés, a fin de que puedan ser usados por usuarios que no comprendan el idioma español. Este cambio es experimental y puede ser variado en versiones posteriores.
 
 
