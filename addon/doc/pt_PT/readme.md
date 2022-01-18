@@ -15,9 +15,9 @@ A forma de usar o WikiChecker é muito simples. Basta cumprir as três etapas a 
 
 1. Pressione a tecla de atalho atribuída, que anteriormente terá que ser configurada, por si,  na caixa de diálogo entrada de comandos, dentro da categoria WikiChecker.
 
-2. Insira o termo que quer pesquisar, na caixa de edição fornecida para este propósito, e execute a consulta na Wikipedia, pressionando ENTER.
+2. Insira o termo que quer pesquisar, na caixa de edição fornecida para este propósito, e execute a consulta na Wikipedia, pressionando ENTER. Em alternativa, pode usar o botão "pesquisar".
 
-3. Seleccione o resultado que lhe interessa e pressione ENTER sobre ele.
+3. Seleccione o resultado que lhe interessa e pressione ENTER sobre ele. Também pode usar o botão "ler artigo" 
 
 Uma vez que essas três etapas tenham sido realizadas, o artigo será aberto na janela do navegador que tenhamos definido por padrão.
 
@@ -26,16 +26,31 @@ Aviso: O extra define o idioma padrão no NVDA como o idioma de consulta no Wiki
 
 ### Atalhos.
 
-Não existem teclas de atalho pré-atribuídos, para que cada utilizador possa configurar aquele que mais lhe convenha em cada caso, de forma a não interferir com os restantes add-ons. Para atribuí-la, o utilizador deve ir ao menu do NVDA, Preferências, entrada de comandos, e uma vez ali, procurar a categoria chamada WikiChecker, e atribuir a combinação que mais lhe interesse.
+Não existem teclas de atalho pré-atribuídas, para que cada utilizador possa configurar aquela que mais lhe convenha em cada caso, de forma a não interferir com os restantes add-ons. Para atribuí-la, o utilizador deve ir ao menu do NVDA, Preferências, entrada de comandos, e uma vez ali, procurar a categoria chamada WikiChecker, e atribuir a combinação que mais lhe interesse.
 
-Uma vez dentro da interface do extra, existem três combinações de teclas pré-atribuídas, para que nos possamos  mover rapidamente entre os seus diferentes elementos:
+Uma vez na interface do extra, se existirem combinações de teclas predefinidas, de forma que possamos mover-nos rapidamente entre os distintos elementos da mesma:
 
-· Alt + B: nos posiciona acima da caixa de edição para escrever o termo de pesquisa.
-Alt + I: posiciona-nos na lista de idiomas disponíveis, para que possamos escolher um idioma diferente do definido por padrão, ou, caso o idioma padrão não exista no NVDA, para que possamos escolher aquele que desejemos.
-· Alt + A: posiciona-nos na lista de artigos disponíveis, para que possamos escolher um dos resultados retornados pela consulta da Wikipedia.
+* alt+S: posiciona-nos em cima do botão "pesquisar", para fazer a pesquisa na wikipedia.
+* Alt + B:  posiciona-nos em cima da caixa de edição para escrevermos o termo de pesquisa.
+* Alt + I: posiciona-nos na lista de idiomas disponíveis, para que possamos escolher um idioma diferente do definido por padrão, ou, caso o idioma padrão não exista no NVDA, para que possamos escolher aquele que desejemos.
+* Alt + A: posiciona-nos na lista de artigos disponíveis, para que possamos escolher um dos resultados retornados pela consulta da Wikipedia.
+* Alt+L: posiciona-nos em cima do botão 'Ler artigo' para abrir o artigo no navegador.
 
 
-## Log de alterações.
+## Registo de alterações.
+
+### versão 1.2.
+
+* Adicionados dois botões, "pesquisa" e "ler artigo", para que os utilizadores que estão mais acostumados a usar esses elementos não se sintam desorientados ao usar a interface.
+* Adicionadas as traduções para português e francês. Obrigado a Ângelo Miguel Abrantes e Rémy Ruiz, respectivamente.
+* Modificada a lista de idiomas a serem mostradas em inglês, para que possam ser usadas pelos utilizadores que não entendem o idioma espanhol. Essa mudança é experimental e pode ser variada em versões posteriores.
+
+### versão 1.1.
+
+* Adicionada a possibilidade de que o WikiChecker funcione em computadores que trabalham em servidores proxy.
+* Adicionada uma verificação adicional que impede as consultas da Wikipedia se nenhuma linguagem disponível tiver sido previamente escolhida.
+* Adicionadas verificações complementares no carregamento dos idiomas disponíveis, a fim de evitar um mau funcionamento do complemento.
+* Correcção de erros e optimização do código da versão anterior.
 
 ### Versão 1.0.
 
