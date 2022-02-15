@@ -18,6 +18,9 @@ from scriptHandler import script
 
 from .view import *
 
+# We removed the path from the NVDA path addon to avoid potential problems.
+sys.path.remove(os.path.dirname(os.path.abspath(__file__)))
+
 # We call the function in charge of translations.
 addonHandler.initTranslation()
 

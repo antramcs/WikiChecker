@@ -39,6 +39,10 @@ Una vez dentro de la interfaz del complemento, sí existen varias combinaciones 
 
 ## Registro de cambios.
 
+### Versión 1.2.1.
+
+* Modificado un error en el complemento que hacía que la ruta del mismo no fuese eliminada del path de NVDA, con la consiguiente problemática que pudiese causar a futuro. Gracias a Héctor Benítez por el aviso.
+
 ### Versión 1.2.
 
 * añadidos dos botones, 'Buscar' y 'Leer artículo', para que aquellos usuarios que están más acostumbrados a utilizar estos elementos no se sientan desorientados al usar la interfaz.
