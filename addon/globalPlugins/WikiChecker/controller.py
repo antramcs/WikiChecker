@@ -72,8 +72,8 @@ class DoLanguageCheck(Thread):
 
 			for i in range(1, len(rows)):
 				cells = rows[i].find_all('td')
-				abbreviation = cells[0].a.string
-				name = cells[1].a.string
+				abbreviation = cells[0].a.string.strip()
+				name = cells[1].a.string.strip()
 				self.parent.languages.append(abbreviation)
 				self.parent.languagesList.Append(name)
 
