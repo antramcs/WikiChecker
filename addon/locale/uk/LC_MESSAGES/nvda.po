@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the 'WikiChecker' package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 'WikiChecker' '1.2.2'\n"
+"Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
+"POT-Creation-Date: 2022-11-11 09:01+0200\n"
+"PO-Revision-Date: 2022-11-11 12:56+0200\n"
+"Last-Translator: Heorhii <nvda.translation.uk@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2\n"
+
+#. Translators: Name of the plugin's main window.
+#: addon\globalPlugins\WikiChecker\__init__.py:35
+msgid "WikiChecker - Ventana Principal"
+msgstr "WikiChecker - головне вікно"
+
+#. Translators: Description of the plugin.
+#: addon\globalPlugins\WikiChecker\__init__.py:48
+msgid ""
+"Busca los artículos relacionados con el término introducido en Wikipedia."
+msgstr "Пошук статей, пов'язаних з введеним терміном, у Вікіпедії."
+
+#. Translators: Plugin category name.
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on
+#. to be shown on installation and add-on information found in Add-ons Manager.
+#: addon\globalPlugins\WikiChecker\__init__.py:50 buildVars.py:23
+msgid "WikiChecker"
+msgstr "WikiChecker"
+
+#. Translators: Message shown to the user if it is not possible to load the languages ​​available in wikipedia.
+#: addon\globalPlugins\WikiChecker\__init__.py:67
+msgid ""
+"No se pudieron cargar los idiomas del complemento. Vuelve a intentarlo en "
+"unos segundos.\n"
+"\n"
+"Si el problema persiste comprueba tu conexión a Internet, o reinicia NVDA."
+msgstr ""
+"Не вдалося завантажити додаткові мови. Будь ласка, спробуйте ще раз через "
+"кілька секунд.\n"
+"\n"
+"Якщо проблема не зникає, перевірте підключення до Інтернету або "
+"перезапустіть NVDA."
+
+#. Translators: Message shown to the user in case the query cannot be made on Wikipedia.
+#: addon\globalPlugins\WikiChecker\controller.py:105
+msgid "No se ha podido realizar la consulta en wikipedia."
+msgstr "Не вдалося зробити запит до Вікіпедії."
+
+#. Translators: Title of the error message.
+#: addon\globalPlugins\WikiChecker\controller.py:107
+#: addon\globalPlugins\WikiChecker\controller.py:119
+#: addon\globalPlugins\WikiChecker\controller.py:126
+#: addon\globalPlugins\WikiChecker\view.py:90
+#: addon\globalPlugins\WikiChecker\view.py:96
+msgid "¡Error!"
+msgstr "¡Помилка!"
+
+#. Translators: message that is shown to the user in case there are no articles that meet the specified criteria.
+#: addon\globalPlugins\WikiChecker\controller.py:117
+msgid "No existen artículos disponibles que cumplan los criterios indicados."
+msgstr "Немає доступних статей, які відповідають вказаним критеріям."
+
+#. Translators: message that is shown to the user if for some reason, the Wikipedia query fails for unforeseen reasons.
+#: addon\globalPlugins\WikiChecker\controller.py:124
+msgid "No se ha podido procesar la respuesta de Wikipedia."
+msgstr "Не вдалося обробити відповідь Вікіпедії."
+
+#. Translators: Label name of the list of available languages.
+#: addon\globalPlugins\WikiChecker\view.py:30
+msgid "&Idiomas disponibles"
+msgstr "&Доступні мови"
+
+#. Translators: Label name of the search edit box.
+#: addon\globalPlugins\WikiChecker\view.py:35
+msgid "Término a &buscar"
+msgstr "Термін для &пошуку"
+
+#. Translators: Label name of the 'Search' button.
+#: addon\globalPlugins\WikiChecker\view.py:40
+msgid "Bu&scar"
+msgstr "&Пошук"
+
+#. Translators: Label name of the list of available items.
+#: addon\globalPlugins\WikiChecker\view.py:43
+msgid "&Artículos disponibles"
+msgstr "&Результати пошуку"
+
+#. Translators: Label name of the 'Read Article' button.
+#: addon\globalPlugins\WikiChecker\view.py:48
+msgid "&Leer artículo"
+msgstr "&Прочитати статтю"
+
+#. Translators: Message shown to the user if they have not typed any term to search for in the edit box.
+#: addon\globalPlugins\WikiChecker\view.py:88
+msgid ""
+"El cuadro de búsqueda no puede estar vacío. Debes introducir un término a "
+"buscar."
+msgstr ""
+"Поле пошуку не може бути порожнім. Ви повинні ввести пошуковий термін."
+
+#. Translators: Message shown to the user if they have not selected a language from among the available ones.
+#: addon\globalPlugins\WikiChecker\view.py:94
+msgid ""
+"Debes seleccionar un idioma de entre los disponibles antes de realizar la "
+"consulta. En caso de no haber ninguno disponible, comprueba tu conexión a "
+"Internet, o reinicia NVDA."
+msgstr ""
+"Ви повинні вибрати мову серед доступних, перш ніж робити запит. Якщо їх "
+"немає, перевірте підключення до Інтернету або перезапустіть NVDA."
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:26
+msgid "Buscador rápido de artículos en Wikipedia."
+msgstr "Швидкий пошук статей у Вікіпедії."
