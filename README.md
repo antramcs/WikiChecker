@@ -39,6 +39,17 @@ Una vez dentro de la interfaz del complemento, sí existen varias combinaciones 
 
 ## Registro de cambios.
 
+### Versión 1.2.3.
+
+* Actualizada la compatibilidad de WikiChecker con NVDA 2023.1.0.
+¨* Modificado el archivo README para reflejar los cambios de la versión 1.2.2 faltantes.
+* Traducido WikiChecker al Ucraniano. Gracias por la contribución a VovaMobile.
+
+### Versión 1.2.2.
+
+* Actualizada la compatibilidad de WikiChecker con NVDA 2022.1.0.
+* Quitados los espacios del principio de los idiomas. Esto hacía que pudiesen encontrarse algunos idiomas pulsando un espacio en el cuadro combinado, en vez de hacerlo por la inicial del mismo, como pasa en el idioma "Retorrománico / Romanche". Gracias a Sukil echenique por la contribución.
+
 ### Versión 1.2.1.
 
 * Modificado un error en el complemento que hacía que la ruta del mismo no fuese eliminada del path de NVDA, con la consiguiente problemática que pudiese causar a futuro. Gracias a Héctor Benítez por el aviso.
@@ -49,14 +60,12 @@ Una vez dentro de la interfaz del complemento, sí existen varias combinaciones 
 * Añadidas las traducciones al portugués y francés. Gracias a Ângelo Miguel Abrantes y Rémy Ruiz respectivamente.
 * Modificada la lista de idiomas para que se muestren en inglés, a fin de que puedan ser usados por usuarios que no comprendan el idioma español. Este cambio es experimental y puede ser variado en versiones posteriores.
 
-
 ### Versión 1.1.
 
 * Añadida la posibilidad de que WikiChecker funcione en ordenadores que trabajen bajo servidores proxi.
 * Añadida una comprobación adicional que impida lanzar consultas a Wikipedia si no se ha escogido un idioma de entre los disponibles previamente.
 * Añadidas comprobaciones adicionales en la carga de los idiomas disponibles a fin de evitar un mal funcionamiento del complemento.
 * Corrección de errores y optimización del código desde la versión anterior.
-
 
 ### Versión 1.0.
 
