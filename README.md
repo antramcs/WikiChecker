@@ -39,6 +39,10 @@ Una vez dentro de la interfaz del complemento, sí existen varias combinaciones 
 
 ## Registro de cambios.
 
+### Versión 1.2.4.
+
+* Actualizada la compatibilidad del complemento a NVDA 2024.1.
+
 ### Versión 1.2.3.
 
 * Actualizada la compatibilidad de WikiChecker con NVDA 2023.1.0.
